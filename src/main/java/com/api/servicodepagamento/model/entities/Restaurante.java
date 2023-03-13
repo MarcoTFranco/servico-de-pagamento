@@ -7,9 +7,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.util.Assert;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_restaurante")
@@ -48,10 +46,8 @@ public class Restaurante {
         return formasDePagamento;
     }
 
-    public List<FormaDePagamento> listarPagamentosIguais(FormaDePagamento forma) {
-        return formasDePagamento.stream()
-                .filter(formaDePagamento -> formaDePagamento.equals(forma))
-                .collect(Collectors.toList());
+    public boolean pagamentosIguais(FormaDePagamento forma) {
+        return formasDePagamento.contains(forma);
     }
 
 }

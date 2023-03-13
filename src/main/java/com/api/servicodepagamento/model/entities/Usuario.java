@@ -51,11 +51,9 @@ public class Usuario {
         return this.formasDePagamento;
     }
 
-    public Map<FormaDePagamento, String> listaDePagamentosAceitos(Restaurante restaurante) {
-        Map<FormaDePagamento, String> map = new HashMap<>();
-        formasDePagamento.stream()
-                .flatMap(formaDePagamento -> restaurante.listarPagamentosIguais(formaDePagamento).stream())
-                .forEach(formaDePagamento -> map.put(formaDePagamento, formaDePagamento.getDescricao()));
-        return map;
+    public Set<FormaDePagamento> listaDePagamentosAceitos(Restaurante restaurante) {
+        return formasDePagamento.stream()
+                .filter(restaurante::pagamentosIguais)
+                .collect(Collectors.toSet());
     }
 }

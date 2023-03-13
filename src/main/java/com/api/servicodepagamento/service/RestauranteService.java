@@ -15,4 +15,8 @@ public class RestauranteService {
         repository.save(restaurante);
     }
 
+    public Restaurante findById (Long id) {
+        return repository.findById(id).orElseThrow();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.api.servicodepagamento.controller;
 
 import com.api.servicodepagamento.model.entities.Usuario;
 import com.api.servicodepagamento.model.request.UsuarioRequest;
+import com.api.servicodepagamento.service.RestauranteService;
 import com.api.servicodepagamento.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService service;
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private RestauranteService restauranteService;
 
 
     @PostMapping(value = "/usuarios")
     public ResponseEntity<Usuario> insert(@RequestBody @Valid UsuarioRequest request) {
         Usuario usuario = request.toModel();
-        service.insert(usuario);
+        usuarioService.insert(usuario);
         return ResponseEntity.ok().body(usuario);
     }
-
 }

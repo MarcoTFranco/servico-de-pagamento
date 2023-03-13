@@ -7,8 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.util.Assert;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario {
@@ -29,8 +30,8 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario (@Email @NotBlank String email,
-                    @Size(min = 1) Set<FormaDePagamento> formasDePagamento) {
+    public Usuario(@Email @NotBlank String email,
+                   @Size(min = 1) Set<FormaDePagamento> formasDePagamento) {
         Assert.notNull(formasDePagamento, "Não pode ser nulo");
         Assert.isTrue(formasDePagamento.size() > 0,
                 "Precisa de pelo menos uma forma de pagamento");
@@ -46,8 +47,15 @@ public class Usuario {
         return this.email;
     }
 
-    public Set<FormaDePagamento> getFormasDePagamento () {
+    public Set<FormaDePagamento> getFormasDePagamento() {
         return this.formasDePagamento;
     }
 
+    public Map<FormaDePagamento, String> listaDePagamentosAceitos(Restaurante restaurante) {
+        Map<FormaDePagamento, String> map = new HashMap<>();
+        formasDePagamento.stream()
+                .flatMap(formaDePagamento -> restaurante.listarPagamentosIguais(formaDePagamento).stream())
+                .forEach(formaDePagamento -> map.put(formaDePagamento, formaDePagamento.getDescricao()));
+        return map;
+    }
 }

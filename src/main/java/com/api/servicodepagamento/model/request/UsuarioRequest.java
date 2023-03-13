@@ -1,7 +1,7 @@
 package com.api.servicodepagamento.model.request;
 
 import com.api.servicodepagamento.model.entities.Usuario;
-import com.api.servicodepagamento.model.util.FormaDePagamento;
+import com.api.servicodepagamento.util.FormaDePagamento;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -15,7 +15,7 @@ public class UsuarioRequest {
     @NotBlank
     private String email;
     @Size(min = 1)
-    private Set<FormaDePagamento> formasDePagamento = new HashSet<>();
+    private final Set<FormaDePagamento> formasDePagamento = new HashSet<>();
 
     @Deprecated
     public UsuarioRequest() {

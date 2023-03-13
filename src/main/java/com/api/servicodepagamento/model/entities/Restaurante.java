@@ -1,6 +1,6 @@
 package com.api.servicodepagamento.model.entities;
 
-import com.api.servicodepagamento.model.util.FormaDePagamento;
+import com.api.servicodepagamento.util.FormaDePagamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,7 +19,7 @@ public class Restaurante {
     private String nome;
     @Size(min = 1)
     @ElementCollection
-    private Set<FormaDePagamento> formasDePagamento = new HashSet<>();
+    private final Set<FormaDePagamento> formasDePagamento = new HashSet<>();
 
     @Deprecated
     public Restaurante() {

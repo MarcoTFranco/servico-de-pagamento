@@ -1,4 +1,4 @@
-package com.api.servicodepagamento.model.util;
+package com.api.servicodepagamento.util;
 
 public enum FormaDePagamento {
 
@@ -11,8 +11,10 @@ public enum FormaDePagamento {
     cheque(false, "Tem quer ser valido");
 
     private final String descricao;
+    private final Boolean online;
 
-    private FormaDePagamento(Boolean online, String descricao) {
+    FormaDePagamento(Boolean online, String descricao) {
+        this.online = online;
         this.descricao = descricao;
     }
 
@@ -20,4 +22,7 @@ public enum FormaDePagamento {
         return this.descricao;
     }
 
+    public Boolean getOnline() {
+        return online;
+    }
 }

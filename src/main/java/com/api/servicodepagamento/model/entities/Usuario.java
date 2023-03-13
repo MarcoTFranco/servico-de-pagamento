@@ -1,13 +1,15 @@
 package com.api.servicodepagamento.model.entities;
 
-import com.api.servicodepagamento.model.util.FormaDePagamento;
+import com.api.servicodepagamento.util.FormaDePagamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -24,7 +26,7 @@ public class Usuario {
 
     @Size(min = 1)
     @ElementCollection
-    private Set<FormaDePagamento> formasDePagamento = new HashSet<>();
+    private final Set<FormaDePagamento> formasDePagamento = new HashSet<>();
 
     @Deprecated
     public Usuario() {
@@ -51,9 +53,12 @@ public class Usuario {
         return this.formasDePagamento;
     }
 
-    public Set<FormaDePagamento> listaDePagamentosAceitos(Restaurante restaurante) {
+    public Set<FormaDePagamento> listaDePagamentosAceitos(Restaurante restaurante, Collection<RegrasFraude> regrasFraude) {
         return formasDePagamento.stream()
                 .filter(restaurante::pagamentosIguais)
+                .filter(formaDePagamento -> {
+                    return regrasFraude.stream().allMatch(regra -> regra.aceita(formaDePagamento, this));
+                })
                 .collect(Collectors.toSet());
     }
 }

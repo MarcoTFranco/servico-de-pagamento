@@ -4,6 +4,7 @@ import com.api.servicodepagamento.model.entities.Restaurante;
 import com.api.servicodepagamento.model.entities.Usuario;
 import com.api.servicodepagamento.model.request.ListaFormasDePagamentoRequest;
 import com.api.servicodepagamento.model.response.DetalheFormaPagamento;
+import com.api.servicodepagamento.service.ListaDePagamentosService;
 import com.api.servicodepagamento.service.RestauranteService;
 import com.api.servicodepagamento.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/v1")
 public class ListaDePagamentosController {
+
+    @Autowired
+    private ListaDePagamentosService listaDePagamentosService;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -31,12 +34,9 @@ public class ListaDePagamentosController {
         Usuario usuario = usuarioService.findById(request.getIdUsuario());
         Restaurante restaurante = restauranteService.findById(request.getIdRestaurante());
 
-        List<DetalheFormaPagamento> detalheFormaPagamentos = usuario.listaDePagamentosAceitos(restaurante)
-                .stream()
-                .map(DetalheFormaPagamento::new)
-                .collect(Collectors.toList());
+        List<DetalheFormaPagamento> list = listaDePagamentosService.detalheFormaPagamentos(usuario, restaurante);
 
-        return ResponseEntity.ok().body(detalheFormaPagamentos);
+        return ResponseEntity.ok().body(list);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.api.servicodepagamento.model.response;
 
-import com.api.servicodepagamento.model.util.FormaDePagamento;
+import com.api.servicodepagamento.util.FormaDePagamento;
 
 public class DetalheFormaPagamento {
 

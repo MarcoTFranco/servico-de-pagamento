@@ -61,4 +61,10 @@ public class Usuario {
                 })
                 .collect(Collectors.toSet());
     }
+
+    public boolean podePagar(Restaurante restaurante,
+                             FormaDePagamento formaDePagamento
+            , Collection<RegrasFraude> regrasFraude) {
+        return listaDePagamentosAceitos(restaurante, regrasFraude).contains(formaDePagamento);
+    }
 }

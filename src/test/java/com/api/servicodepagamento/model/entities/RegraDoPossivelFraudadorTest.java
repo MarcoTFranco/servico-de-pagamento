@@ -1,5 +1,6 @@
 package com.api.servicodepagamento.model.entities;
 
+import com.api.servicodepagamento.service.RegraDoPossivelFraudador;
 import com.api.servicodepagamento.util.FormaDePagamento;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

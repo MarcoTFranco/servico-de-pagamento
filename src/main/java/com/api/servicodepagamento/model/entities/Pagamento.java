@@ -4,6 +4,7 @@ import com.api.servicodepagamento.util.StatusTrasacao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -70,5 +71,16 @@ public class Pagamento {
 
     public Set<Transacao> getTrasacoes() {
         return trasacoes;
+    }
+
+    public void conclui() {
+        Assert.isTrue(!foiConcluido(),
+                "Você não pode concluir uma compra que ja foi concluida");
+        this.trasacoes.add(new Transacao(StatusTrasacao.concluida));
+    }
+
+    public boolean foiConcluido() {
+        return this.trasacoes.stream()
+                .anyMatch(transacao -> transacao.temStatus(StatusTrasacao.concluida));
     }
 }

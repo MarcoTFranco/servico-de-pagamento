@@ -1,9 +1,9 @@
 package com.api.servicodepagamento.service.validator;
 
-import com.api.servicodepagamento.model.entities.RegrasFraude;
 import com.api.servicodepagamento.model.entities.Restaurante;
 import com.api.servicodepagamento.model.entities.Usuario;
-import com.api.servicodepagamento.model.request.TentativaDeTransacaoRequest;
+import com.api.servicodepagamento.model.request.PedidoOfflineRequest;
+import com.api.servicodepagamento.service.RegrasFraude;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.validation.Validator;
 
 import java.util.Collection;
 @Component
-public class CombinacaoRestauranteUsuarioFormaPagamentoValidator implements Validator {
+public class CombinacaoFormaDePagamentoValidator implements Validator {
     @PersistenceContext
     private EntityManager manager;
     @Autowired
@@ -21,7 +21,7 @@ public class CombinacaoRestauranteUsuarioFormaPagamentoValidator implements Vali
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return TentativaDeTransacaoRequest.class.isAssignableFrom(clazz);
+        return PedidoOfflineRequest.class.isAssignableFrom(clazz);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class CombinacaoRestauranteUsuarioFormaPagamentoValidator implements Vali
             return;
         }
 
-        TentativaDeTransacaoRequest request = (TentativaDeTransacaoRequest) target;
+        PedidoOfflineRequest request = (PedidoOfflineRequest) target;
         Usuario usuario = manager.find(Usuario.class, request.getIdUsuario());
         Restaurante restaurante = manager.find(Restaurante.class, request.getIdRestaurante());
 

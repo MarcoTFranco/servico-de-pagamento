@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.function.Supplier;
 
 @Component
-public class ObterValorPedido {
+public class ObterValorDoPedido {
 
     public BigDecimal executa(Long idPedido, Supplier<Exception> codigoEmCasoNaoPedidoExistente) throws Exception {
         try {

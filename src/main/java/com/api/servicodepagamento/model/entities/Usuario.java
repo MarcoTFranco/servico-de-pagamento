@@ -1,5 +1,6 @@
 package com.api.servicodepagamento.model.entities;
 
+import com.api.servicodepagamento.service.RegrasFraude;
 import com.api.servicodepagamento.util.FormaDePagamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

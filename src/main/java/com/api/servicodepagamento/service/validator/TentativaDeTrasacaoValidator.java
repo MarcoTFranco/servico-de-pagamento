@@ -1,6 +1,6 @@
 package com.api.servicodepagamento.service.validator;
 
-import com.api.servicodepagamento.model.request.TentativaDeTransacaoRequest;
+import com.api.servicodepagamento.model.request.PedidoOfflineRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -10,13 +10,13 @@ import org.springframework.validation.Validator;
 public class TentativaDeTrasacaoValidator implements Validator {
 
     @Autowired
-    private CombinacaoRestauranteUsuarioFormaPagamentoValidator combinacaoRestauranteUsuarioFormaPagamentoValidator;
+    private CombinacaoFormaDePagamentoValidator combinacaoFormaDePagamentoValidator;
     @Autowired
-    private FormaPagamentoOffilineValidator formaPagamentoOffilineValidator;
+    private FormaDePagamentoOffilineValidator formaDePagamentoOffilineValidator;
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return TentativaDeTransacaoRequest.class.isAssignableFrom(clazz);
+        return PedidoOfflineRequest.class.isAssignableFrom(clazz);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class TentativaDeTrasacaoValidator implements Validator {
             return;
         }
 
-        combinacaoRestauranteUsuarioFormaPagamentoValidator.validate(target, errors);
-        formaPagamentoOffilineValidator.validate(target, errors);
+        combinacaoFormaDePagamentoValidator.validate(target, errors);
+        formaDePagamentoOffilineValidator.validate(target, errors);
     }
 }

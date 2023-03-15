@@ -27,4 +27,8 @@ public class Transacao {
     public String getCodigo() {
         return codigo;
     }
+
+    public boolean temStatus(StatusTrasacao concluida) {
+        return this.statusTrasacao.equals(concluida);
+    }
 }

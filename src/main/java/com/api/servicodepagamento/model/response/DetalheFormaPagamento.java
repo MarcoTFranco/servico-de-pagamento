@@ -4,8 +4,8 @@ import com.api.servicodepagamento.util.FormaDePagamento;
 
 public class DetalheFormaPagamento {
 
-    private final String id;
-    private final String descricao;
+    private String id;
+    private String descricao;
 
     public DetalheFormaPagamento(FormaDePagamento formaDePagamento) {
         this.id = formaDePagamento.name();

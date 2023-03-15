@@ -1,6 +1,5 @@
 package com.api.servicodepagamento.service;
 
-import com.api.servicodepagamento.model.entities.RegrasFraude;
 import com.api.servicodepagamento.model.entities.Restaurante;
 import com.api.servicodepagamento.model.entities.Usuario;
 import com.api.servicodepagamento.model.response.DetalheFormaPagamento;
@@ -18,7 +17,6 @@ public class ListaDePagamentosService {
     private Collection<RegrasFraude> regrasFraude;
 
     public List<DetalheFormaPagamento> detalheFormaPagamentos(Usuario usuario, Restaurante restaurante) {
-
         return usuario.listaDePagamentosAceitos(restaurante, regrasFraude)
                 .stream()
                 .map(DetalheFormaPagamento::new)

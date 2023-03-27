@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 @RestController
 public class PagamentoOfflineController {
@@ -51,21 +50,11 @@ public class PagamentoOfflineController {
 
     @PostMapping(value = "/pagamento/offline/{codigoPagamento}/concluir")
     public void concluiPagamento(@PathVariable String codigoPagamento) {
-
-        Optional<Pagamento> possivelPagamento = service.findByCode(codigoPagamento);
-
-        if (possivelPagamento.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-        Pagamento pagamento = possivelPagamento.get();
-
+        Pagamento pagamento = service.findByCode(codigoPagamento);
         if (pagamento.foiConcluido()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-
         pagamento.conclui();
         service.merge(pagamento);
-
     }
 }

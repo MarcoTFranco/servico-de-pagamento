@@ -15,7 +15,7 @@ public class UsuarioService {
         repository.save(usuario);
     }
 
-    public Usuario findById (Long id) {
+    public Usuario findById(Long id) {
         return repository.findById(id).orElseThrow();
     }
 

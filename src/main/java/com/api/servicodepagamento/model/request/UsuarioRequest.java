@@ -36,6 +36,6 @@ public class UsuarioRequest {
     }
 
     public Usuario toModel() {
-        return new Usuario(email , formasDePagamento);
+        return new Usuario(email, formasDePagamento);
     }
 }

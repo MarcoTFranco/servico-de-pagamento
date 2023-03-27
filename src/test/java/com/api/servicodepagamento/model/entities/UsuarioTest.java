@@ -1,7 +1,7 @@
 package com.api.servicodepagamento.model.entities;
 
-import com.api.servicodepagamento.util.FormaDePagamento;
 import com.api.servicodepagamento.service.RegrasFraude;
+import com.api.servicodepagamento.util.FormaDePagamento;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -98,7 +98,6 @@ class UsuarioTest {
         Set<FormaDePagamento> formaDePagamentos = usuario.listaDePagamentosAceitos(restaurante2, regras);
         Assertions.assertTrue(formaDePagamentos.isEmpty());
     }
-
 
 
 }

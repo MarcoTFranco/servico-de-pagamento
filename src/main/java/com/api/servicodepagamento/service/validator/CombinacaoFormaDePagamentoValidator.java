@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.util.Collection;
+
 @Component
 public class CombinacaoFormaDePagamentoValidator implements Validator {
     @PersistenceContext
@@ -35,7 +36,7 @@ public class CombinacaoFormaDePagamentoValidator implements Validator {
         Restaurante restaurante = manager.find(Restaurante.class, request.getIdRestaurante());
 
         boolean podePagar = usuario.podePagar(restaurante, request.getFormaDePagamento(), regrasFraudes);
-        if(!podePagar) {
+        if (!podePagar) {
             errors.reject(null, "O usuario e/ou restaurante nao aceita a forma de pagamento");
         }
     }

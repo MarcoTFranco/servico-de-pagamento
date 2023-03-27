@@ -17,6 +17,7 @@ class RestauranteTest {
                 Arguments.of(Set.of(FormaDePagamento.dinheiro)),
                 Arguments.of(Set.of(FormaDePagamento.maquina, FormaDePagamento.cheque)));
     }
+
     private static Stream<Arguments> geradorTeste2() {
         return Stream.of(
                 Arguments.of(Set.of()),

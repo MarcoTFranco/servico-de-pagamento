@@ -30,7 +30,7 @@ public class Pagamento {
     @NotNull
     private Restaurante restaurante;
     @ElementCollection
-    private Set<Transacao> trasacoes = new HashSet<>();
+    private final Set<Transacao> trasacoes = new HashSet<>();
 
     @Deprecated
     public Pagamento() {

@@ -13,7 +13,7 @@ public class EndpointsExternosController {
 
     @GetMapping(value = "/api/pedidos/{idPedido}")
     public ResponseEntity<Pedido> pedido(@PathVariable Long idPedido) {
-        Pedido pedido = new Pedido (idPedido, new BigDecimal("50.00"));
+        Pedido pedido = new Pedido(idPedido, new BigDecimal("50.00"));
         return ResponseEntity.ok().body(pedido);
     }
 

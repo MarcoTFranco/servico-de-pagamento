@@ -25,9 +25,6 @@ public class ExistIdValidator implements ConstraintValidator<ExistId, Object> {
         List<?> list = manager.createQuery("select id from " + className.getName() + " where id =:value")
                 .setParameter("value", value)
                 .getResultList();
-        if ( value == null || list.size() > 0) {
-            return true;
-        }
-        return false;
+        return value == null || list.size() > 0;
     }
 }
